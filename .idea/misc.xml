@@ -3,7 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_home.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_active.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_inactive.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/ic_find_active.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/ic_find_inactive.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/ic_home_active.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/ic_home_inactive.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/result_list_active.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/result_list_inactive.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/result_list_selector.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/tab_icon_color_selector.xml" value="0.2595" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_find.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_result.xml" value="0.35520833333333335" />
       </map>
     </option>
   </component>

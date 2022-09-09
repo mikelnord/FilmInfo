@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.android.filminfo.ui.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/findFragment"
+        android:name="com.android.filminfo.ui.FindFragment"
+        android:label="FindFragment" />
+    <fragment
+        android:id="@+id/resultFindFragment"
+        android:name="com.android.filminfo.ui.ResultFindFragment"
+        android:label="ResultFindFragment" />
+</navigation>
