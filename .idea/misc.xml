@@ -8,8 +8,10 @@
         <entry key="app/src/main/res/drawable/ic_baseline_home_inactive.xml" value="0.2595" />
         <entry key="app/src/main/res/drawable/ic_find_active.xml" value="0.2595" />
         <entry key="app/src/main/res/drawable/ic_find_inactive.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/ic_find_selector.xml" value="0.2595" />
         <entry key="app/src/main/res/drawable/ic_home_active.xml" value="0.2595" />
         <entry key="app/src/main/res/drawable/ic_home_inactive.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/ic_home_selector.xml" value="0.2595" />
         <entry key="app/src/main/res/drawable/result_list_active.xml" value="0.2595" />
         <entry key="app/src/main/res/drawable/result_list_inactive.xml" value="0.2595" />
         <entry key="app/src/main/res/drawable/result_list_selector.xml" value="0.2595" />

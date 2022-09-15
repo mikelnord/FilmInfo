@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FilmInfo</string>
+    <string name="find_title">Find</string>
+    <string name="result_title">Result</string>
+    <string name="home_title">Home</string>
+    <string name="start_title">StartPage</string>
 </resources>
