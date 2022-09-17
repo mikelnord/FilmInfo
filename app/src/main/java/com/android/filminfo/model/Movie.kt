@@ -4,7 +4,7 @@ package com.android.filminfo.model
 data class Movie(
     val id: Int,
     val type: String?,
-    val name: String,
+    val name: String?,
     val description: String?,
     val slogan: String?,
     val year: Int,
