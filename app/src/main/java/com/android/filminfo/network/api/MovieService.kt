@@ -12,4 +12,12 @@ interface MovieService {
         @Query("field") field: String = "year"
     ): MoviesList
 
+    @GET("/movie")
+    suspend fun getFilmForType(
+        @Query("search") search: String,
+        @Query("field") field: String ="type",
+        @Query("search") search2: String="2022",
+        @Query("field") field2: String="year"
+    ): MoviesList
+
 }

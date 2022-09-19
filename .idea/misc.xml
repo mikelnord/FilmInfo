@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/layout/fragment_find.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_result.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/fragment_start.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/list_item_film.xml" value="0.35520833333333335" />
       </map>
     </option>

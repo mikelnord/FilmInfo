@@ -31,9 +31,8 @@ class FilmListAdapter : ListAdapter<Movie, FilmListAdapter.ViewHolder>(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Movie) {
             with(binding) {
-                item.name?.let {
-                    headerTextviewRecyclerItem.text = item.name
-                }
+                val name = item.name ?: item.alternativeName
+                headerTextviewRecyclerItem.text = name ?: "NoName"
                 item.description?.let {
                     descriptionTextviewRecyclerItem.text = item.description
                 }

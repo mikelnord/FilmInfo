@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.android.filminfo.adapter.FilmListAdapter
 import com.android.filminfo.databinding.FragmentResultBinding
 import com.android.filminfo.util.Status
@@ -17,7 +17,7 @@ class ResultFindFragment : Fragment() {
 
     private var _binding: FragmentResultBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: FilmListViewModel by viewModels()
+    private val viewModel: FilmListViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +34,7 @@ class ResultFindFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: FilmListAdapter) {
-        viewModel.getMovie().observe(viewLifecycleOwner) {
+        viewModel.movieList.observe(viewLifecycleOwner) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
