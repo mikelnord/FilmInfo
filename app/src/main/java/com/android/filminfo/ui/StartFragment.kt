@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.android.filminfo.databinding.FragmentStartBinding
 
 class StartFragment : Fragment() {
@@ -27,18 +30,15 @@ class StartFragment : Fragment() {
     private fun setupUI() {
         val home = parentFragment as HomeFragment
         binding.buttonMovie.setOnClickListener {
-            viewModel.search = "movie"
-            viewModel.launchMovies()
+            viewModel.queryString = "movie"
             home.setResult()
         }
         binding.buttonCartoon.setOnClickListener {
-            viewModel.search = "cartoon"
-            viewModel.launchMovies()
+            viewModel.queryString = "cartoon"
             home.setResult()
         }
         binding.buttonTvseries.setOnClickListener {
-            viewModel.search = "tv-series"
-            viewModel.launchMovies()
+            viewModel.queryString = "tv-series"
             home.setResult()
         }
     }

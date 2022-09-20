@@ -1,12 +1,13 @@
 package com.android.filminfo.ui
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.android.filminfo.data.Repository
-import com.android.filminfo.model.MoviesList
-import com.android.filminfo.util.Resource
+import com.android.filminfo.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,16 +16,9 @@ class FilmListViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    lateinit var search: String //= "movie"
-    private val _movieList = MutableLiveData<Resource<MoviesList>>()
-    val movieList = _movieList
+    lateinit var queryString: String
 
-     fun launchMovies() {
-        viewModelScope.launch {
-            repository.getFilmForType(search).collect {
-                _movieList.value = it
-            }
-        }
+    fun launchMovies(query:String): Flow<PagingData<Movie>> {
+        return repository.getSearchResultStream(query).cachedIn(viewModelScope)
     }
-
 }

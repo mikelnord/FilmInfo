@@ -19,9 +19,9 @@ data class Movie(
 
 data class MoviesList(
     val docs: List<Movie>,
-    val total: String?,
-    val page: String?,
-    val pages: String?
+    val total: Int,
+    val page: Int,
+    val pages: Int
 )
 
 data class Logo(

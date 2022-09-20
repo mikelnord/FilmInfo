@@ -15,9 +15,11 @@ interface MovieService {
     @GET("/movie")
     suspend fun getFilmForType(
         @Query("search") search: String,
-        @Query("field") field: String ="type",
-        @Query("search") search2: String="2022",
-        @Query("field") field2: String="year"
-    ): MoviesList
+        @Query("field") field: String = "type",
+        @Query("search") search2: String = "2022",
+        @Query("field") field2: String = "year",
+        @Query("limit") limit: Int,
+        @Query("page") page: Int
+        ): MoviesList
 
 }

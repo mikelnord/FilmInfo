@@ -2,13 +2,14 @@ package com.android.filminfo.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.filminfo.databinding.ListItemFilmBinding
 import com.android.filminfo.model.Movie
 
-class FilmListAdapter : ListAdapter<Movie, FilmListAdapter.ViewHolder>(
+class FilmListAdapter : PagingDataAdapter<Movie, FilmListAdapter.ViewHolder>(
     FilmListDiffCallback()
 ) {
 
@@ -23,7 +24,7 @@ class FilmListAdapter : ListAdapter<Movie, FilmListAdapter.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let { holder.bind(it) }
     }
 
     class ViewHolder(
@@ -33,9 +34,13 @@ class FilmListAdapter : ListAdapter<Movie, FilmListAdapter.ViewHolder>(
             with(binding) {
                 val name = item.name ?: item.alternativeName
                 headerTextviewRecyclerItem.text = name ?: "NoName"
-                item.description?.let {
-                    descriptionTextviewRecyclerItem.text = item.description
+//                item.description?.let {
+//                    descriptionTextviewRecyclerItem.text = item.description
+//                }
+                item.type?.let {
+                    descriptionTextviewRecyclerItem.text = item.type
                 }
+
             }
         }
     }

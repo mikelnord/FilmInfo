@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.android.filminfo.ui.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_resultFindFragment"
+            app:destination="@id/resultFindFragment" />
+    </fragment>
     <fragment
         android:id="@+id/findFragment"
         android:name="com.android.filminfo.ui.FindFragment"
@@ -15,5 +19,13 @@
     <fragment
         android:id="@+id/resultFindFragment"
         android:name="com.android.filminfo.ui.ResultFindFragment"
-        android:label="ResultFindFragment" />
+        android:label="ResultFindFragment" >
+        <argument
+            android:name="type"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.android.filminfo.ui.StartFragment"
+        android:label="StartFragment" />
 </navigation>

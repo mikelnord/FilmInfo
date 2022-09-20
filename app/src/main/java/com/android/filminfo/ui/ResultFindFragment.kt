@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.android.filminfo.adapter.FilmListAdapter
 import com.android.filminfo.databinding.FragmentResultBinding
-import com.android.filminfo.util.Status
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ResultFindFragment : Fragment() {
@@ -18,6 +22,10 @@ class ResultFindFragment : Fragment() {
     private var _binding: FragmentResultBinding? = null
     private val binding get() = _binding!!
     private val viewModel: FilmListViewModel by activityViewModels()
+    private val movieAdapter: FilmListAdapter by lazy { FilmListAdapter() }
+    private var searchJob: Job? = null
+    private val args: ResultFindFragmentArgs by navArgs()
+    private var oldType = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,37 +33,27 @@ class ResultFindFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentResultBinding.inflate(inflater, container, false)
-
-        val adapter = FilmListAdapter()
-        binding.recyclerResult.adapter = adapter
-        subscribeUi(adapter)
-
+        context ?: return binding.root
+        binding.recyclerResult.adapter = movieAdapter
         return binding.root
     }
 
-    private fun subscribeUi(adapter: FilmListAdapter) {
-        viewModel.movieList.observe(viewLifecycleOwner) {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        resource.data?.let { moveList ->
-                            if (moveList.docs.isNotEmpty()) {
-                                adapter.submitList(moveList.docs)
-                            }
-                        }
-                        binding.loading.visibility = View.GONE
-                    }
-                    Status.ERROR -> {
-                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                        binding.loading.visibility = View.GONE
-                    }
-                    Status.LOADING -> {
-                        binding.loading.visibility = View.VISIBLE
-                    }
-                }
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.queryString != oldType) {
+            search(viewModel.queryString)
+            binding.recyclerResult.scrollToPosition(0)
+            oldType = viewModel.queryString
+        }
+    }
+
+    private fun search(query: String) {
+        searchJob?.cancel()
+        searchJob = lifecycleScope.launch {
+            viewModel.launchMovies(query).collectLatest {
+                movieAdapter.submitData(it)
             }
         }
-
     }
 
     override fun onDestroyView() {
