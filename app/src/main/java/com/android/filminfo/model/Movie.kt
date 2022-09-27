@@ -1,19 +1,26 @@
 package com.android.filminfo.model
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "movies")
 data class Movie(
-    val id: Int,
+    @PrimaryKey val id: Long,
     val type: String?,
     val name: String?,
-    val alternativeName:String?,
+    val alternativeName: String?,
     val description: String?,
     val slogan: String?,
     val year: Int,
-    val logo: Logo,
-    val poster: Poster,
-    val rating: Rating,
-    val votes: Rating,
-    val budget: Budget
+    @Embedded(prefix = "logo_")
+    val logo: Logo?,
+    @Embedded(prefix = "poster_")
+    val poster: Poster?,
+    @Embedded(prefix = "rating_")
+    val rating: Rating?
+//    @Embedded(prefix = "budget_")
+//    val budget: Budget
 )
 
 
@@ -25,18 +32,18 @@ data class MoviesList(
 )
 
 data class Logo(
-    val _id: String,
+    val _id: String?,
     val url: String?
 )
 
 data class Poster(
-    val _id: String,
+    val _id: String?,
     val url: String?,
     val previewUrl: String?
 )
 
 data class Rating(
-    val _id: String,
+    val _id: String?,
     val kp: String?,
     val imdb: String?,
     val filmCritics: String?,
@@ -45,7 +52,7 @@ data class Rating(
 )
 
 data class Budget(
-    val _id: String,
-    val value: Long,
+    val id: String?,
+    val value: Long?,
     val currency: String?
 )
