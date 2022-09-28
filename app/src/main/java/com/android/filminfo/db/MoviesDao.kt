@@ -16,6 +16,7 @@ interface MoviesDao {
     @Query(
         "SELECT * FROM movies WHERE " +
                 "type = :queryType AND year = :queryYear "
+//                "ORDER BY name, alternativeName"
     )
     fun moviesByName(queryType: String, queryYear:String="2022"): PagingSource<Int, Movie>
 

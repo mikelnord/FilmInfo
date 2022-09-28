@@ -33,7 +33,8 @@ class Repository @Inject constructor(
                 database
             ),
             pagingSourceFactory = pagingSourceFactory
-        ).flow.flowOn(Dispatchers.IO)
+        ).flow
+         .flowOn(Dispatchers.IO)
 
     }
 
