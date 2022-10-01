@@ -34,12 +34,13 @@ class Repository @Inject constructor(
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
-         .flowOn(Dispatchers.IO)
-
+            .flowOn(Dispatchers.IO)
     }
 
+    fun getMovie(movieId: String) = database.moviesDao().getMovie(movieId)
+
     companion object {
-        private const val NETWORK_PAGE_SIZE = 10
+        private const val NETWORK_PAGE_SIZE = 50
     }
 
 }

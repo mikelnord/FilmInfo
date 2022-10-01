@@ -30,25 +30,35 @@ class MovieRemoteMediator(
             LoadType.PREPEND -> {
                 val remoteKeys = getRemoteKeyForFirstItem(state)
                 val prevKey = remoteKeys?.prevKey
-                    ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+                if (prevKey == null) {
+                    return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+                }
                 prevKey
             }
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastItem(state)
                 val nextKey = remoteKeys?.nextKey
-                    ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+                if (nextKey == null) {
+                    return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+                }
                 nextKey
             }
         }
 
         try {
-            val apiResponse =
-                service.getFilmForType(query, "type", "2022", "year", state.config.pageSize, page)
+            val apiResponse = service.getFilmForType(
+                query,
+                "type",
+                "2022",
+                "year",
+                page,
+                state.config.pageSize
+            )
 
             val movies = apiResponse.docs
-            val endOfPaginationReached = movies.isEmpty()
+            val endOfPaginationReached =
+                movies.isEmpty()
             moviesDatabase.withTransaction {
-                // clear all tables in the database
                 if (loadType == LoadType.REFRESH) {
                     moviesDatabase.movieKeysDao().clearRemoteKeys()
                     moviesDatabase.moviesDao().clearRepos()
@@ -71,15 +81,15 @@ class MovieRemoteMediator(
 
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Movie>): RemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
-            ?.let { repo ->
-                moviesDatabase.movieKeysDao().remoteKeysRepoId(repo.id)
+            ?.let { movie ->
+                moviesDatabase.movieKeysDao().remoteKeysRepoId(movie.id)
             }
     }
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Movie>): RemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
-            ?.let { repo ->
-                moviesDatabase.movieKeysDao().remoteKeysRepoId(repo.id)
+            ?.let { movie ->
+                moviesDatabase.movieKeysDao().remoteKeysRepoId(movie.id)
             }
     }
 

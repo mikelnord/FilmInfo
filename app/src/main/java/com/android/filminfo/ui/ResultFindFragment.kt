@@ -54,12 +54,14 @@ class ResultFindFragment : Fragment() {
 
                 val isListEmpty =
                     loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                if(_binding!=null) {
                 binding.emptyList.isVisible = isListEmpty
                 binding.recyclerResult.isVisible =
                     loadState.source.refresh is LoadState.NotLoading || loadState.mediator?.refresh is LoadState.NotLoading
                 binding.loading.isVisible = loadState.mediator?.refresh is LoadState.Loading
                 binding.retryButton.isVisible =
                     loadState.mediator?.refresh is LoadState.Error && adapter.itemCount == 0
+                }
                 val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error

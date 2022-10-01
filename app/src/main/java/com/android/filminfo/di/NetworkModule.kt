@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkModule {
 
     private const val BASE_URL = "https://api.kinopoisk.dev/"
-    private const val TOKEN = "CY2HJV4-KAHM896-PV1W9DQ-5W4GART"
+    private const val TOKEN ="CY2HJV4-KAHM896-PV1W9DQ-5W4GART"
 
 
     @Provides

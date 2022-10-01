@@ -1,13 +1,17 @@
 package com.android.filminfo.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.android.filminfo.R
 import com.android.filminfo.databinding.ListItemFilmBinding
 import com.android.filminfo.model.Movie
+import com.android.filminfo.ui.HomeFragmentDirections
+import com.android.filminfo.util.loadImage
 
 class FilmListAdapter : PagingDataAdapter<Movie, FilmListAdapter.ViewHolder>(
     FilmListDiffCallback()
@@ -33,15 +37,29 @@ class FilmListAdapter : PagingDataAdapter<Movie, FilmListAdapter.ViewHolder>(
         fun bind(item: Movie) {
             with(binding) {
                 val name = item.name ?: item.alternativeName
-                headerTextviewRecyclerItem.text = name ?: "NoName"
-//                item.description?.let {
-//                    descriptionTextviewRecyclerItem.text = item.description
-//                }
-                item.type?.let {
-                    descriptionTextviewRecyclerItem.text = item.type
+                mTitle.text = name ?: "NoName"
+                if (item.rating?.kp != null) {
+                    mRaiting.text = item.rating.kp
+                }
+                if (item.poster?.previewUrl != null) {
+                    mPoster.loadImage(item.poster.previewUrl)
+                } else {
+                    mPoster.loadImage(R.drawable.ic_broken_image)
                 }
 
             }
+
+            binding.root.setOnClickListener {
+                navigateToMovieDetail(item, binding.root)
+            }
+        }
+
+        private fun navigateToMovieDetail(
+            movie: Movie,
+            view: View
+        ) {
+            val direction = HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movie.id)
+            view.findNavController().navigate(direction)
         }
     }
 

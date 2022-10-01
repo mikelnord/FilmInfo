@@ -6,20 +6,14 @@ import retrofit2.http.Query
 
 interface MovieService {
 
-    @GET("/movie")
-    suspend fun getMovie(
-        @Query("search") search: String = "2020",
-        @Query("field") field: String = "year"
-    ): MoviesList
-
-    @GET("/movie")
+    @GET("movie")
     suspend fun getFilmForType(
-        @Query("search") search: String,
+        @Query("search") query: String,
         @Query("field") field: String = "type",
         @Query("search") search2: String = "2022",
         @Query("field") field2: String = "year",
-        @Query("limit") limit: Int,
-        @Query("page") page: Int
-        ): MoviesList
+        @Query("page") page: Int,
+        @Query("limit") limit: Int
+    ): MoviesList
 
 }

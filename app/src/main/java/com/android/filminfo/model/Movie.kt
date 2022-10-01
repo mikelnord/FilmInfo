@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "movies")
 data class Movie(
-    @PrimaryKey val id: Long,
+    @PrimaryKey(autoGenerate = true) val keyid: Long,
+    val id: Long,
     val type: String?,
     val name: String?,
     val alternativeName: String?,
@@ -18,11 +19,16 @@ data class Movie(
     @Embedded(prefix = "poster_")
     val poster: Poster?,
     @Embedded(prefix = "rating_")
-    val rating: Rating?
-//    @Embedded(prefix = "budget_")
-//    val budget: Budget
+    val rating: Rating?,
+    @Embedded(prefix = "budget_")
+    val budget: Budget?,
+    @Embedded(prefix = "gen_")
+    val genres: Genres?
 )
 
+data class Genres(
+    val name:String?
+)
 
 data class MoviesList(
     val docs: List<Movie>,

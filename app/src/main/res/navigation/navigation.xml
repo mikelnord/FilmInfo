@@ -9,23 +9,15 @@
         android:name="com.android.filminfo.ui.HomeFragment"
         android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_resultFindFragment"
-            app:destination="@id/resultFindFragment" />
+            android:id="@+id/action_homeFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/findFragment"
-        android:name="com.android.filminfo.ui.FindFragment"
-        android:label="FindFragment" />
-    <fragment
-        android:id="@+id/resultFindFragment"
-        android:name="com.android.filminfo.ui.ResultFindFragment"
-        android:label="ResultFindFragment" >
+        android:id="@+id/movieDetailFragment"
+        android:name="com.android.filminfo.ui.MovieDetailFragment"
+        android:label="MovieDetailFragment" >
         <argument
-            android:name="type"
-            app:argType="string" />
+            android:name="movieId"
+            app:argType="long" />
     </fragment>
-    <fragment
-        android:id="@+id/startFragment"
-        android:name="com.android.filminfo.ui.StartFragment"
-        android:label="StartFragment" />
 </navigation>
