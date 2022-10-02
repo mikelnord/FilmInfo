@@ -1,6 +1,5 @@
 package com.android.filminfo.db
 
-import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
@@ -20,7 +19,15 @@ interface MoviesDao {
                 "type = :queryType AND year = :queryYear " +
                 "ORDER BY keyid"
     )
-    fun moviesByName(queryType: String, queryYear: String = "2022"): PagingSource<Int, Movie>
+    fun moviesByType(queryType: String, queryYear: String = "2022"): PagingSource<Int, Movie>
+
+    @Query(
+        "SELECT * FROM movies WHERE " +
+                "name = :queryName " +
+                "ORDER BY keyid"
+    )
+    fun moviesByName(queryName: String): PagingSource<Int, Movie>
+
 
     @Query("DELETE FROM movies")
     suspend fun clearRepos()

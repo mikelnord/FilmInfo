@@ -36,13 +36,13 @@ class FilmListViewModel @Inject constructor(
             viewModelScope.launch { actionStateFlow.emit(action) }
         }
         pagingDataFlow = searches
-            .flatMapLatest { searchFilmByType(queryString = it.query) }
+            .flatMapLatest { searchFilmByType(queryString = it.query, isFind = it.isFind) }
             .cachedIn(viewModelScope)
     }
 
 
-    private fun searchFilmByType(queryString: String): Flow<PagingData<Movie>> =
-        repository.getSearchResultStream(queryString)
+    private fun searchFilmByType(queryString: String, isFind: Boolean): Flow<PagingData<Movie>> =
+        repository.getSearchResultStream(queryString, isFind)
 
     override fun onCleared() {
 //        savedStateHandle[LAST_SEARCH_QUERY] = state.value.query
@@ -53,9 +53,9 @@ class FilmListViewModel @Inject constructor(
 }
 
 sealed class UiAction {
-    data class Search(val query: String) : UiAction()
+    data class Search(val query: String, val isFind: Boolean = false) : UiAction()
 }
 
 private const val LAST_SEARCH_QUERY: String = "last_search_query"
 private const val LAST_QUERY_SCROLLED: String = "last_query_scrolled"
-private const val DEFAULT_QUERY = "movie"
+private const val DEFAULT_QUERY = ""

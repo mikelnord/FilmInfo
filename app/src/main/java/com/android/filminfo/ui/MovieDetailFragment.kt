@@ -1,5 +1,6 @@
 package com.android.filminfo.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ class MovieDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val detailViewModel: DetailViewModel by viewModels()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,10 +31,13 @@ class MovieDetailFragment : Fragment() {
                 val name = it.name ?: it.alternativeName
                 tvTitle.text = name ?: "NoName"
                 it?.description.let {
-                    tvDescription.text=it
+                    tvDescription.text = it
                 }
                 it?.rating.let {
-                    tvRating.text= it?.kp.toString()
+                    if (it?.kp != "0") {
+                        tvRating.text = "Рейтинг Кинопоиск ${it?.kp.toString()}"
+                        tvRating.visibility = View.VISIBLE
+                    }
                 }
                 if (it.poster?.previewUrl != null) {
                     ivCover.loadImage(it.poster.previewUrl)

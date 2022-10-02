@@ -39,7 +39,12 @@ class FilmListAdapter : PagingDataAdapter<Movie, FilmListAdapter.ViewHolder>(
                 val name = item.name ?: item.alternativeName
                 mTitle.text = name ?: "NoName"
                 if (item.rating?.kp != null) {
-                    mRaiting.text = item.rating.kp
+                    if (item.rating.kp != "0") {
+                        mRaiting.text = item.rating.kp
+                        mRaiting.visibility = View.VISIBLE
+                    } else{
+                        mRaiting.visibility = View.GONE
+                    }
                 }
                 if (item.poster?.previewUrl != null) {
                     mPoster.loadImage(item.poster.previewUrl)

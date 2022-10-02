@@ -38,6 +38,18 @@ class StartFragment : Fragment() {
             viewModel.accept(UiAction.Search(query = "tv-series"))
             home.setResult()
         }
+        binding.buttonAnime.setOnClickListener {
+            viewModel.accept(UiAction.Search(query = "anime"))
+            home.setResult()
+        }
+        binding.buttonAnimatedSeries.setOnClickListener {
+            viewModel.accept(UiAction.Search(query = "animated-series"))
+            home.setResult()
+        }
+        binding.buttonTvShow.setOnClickListener {
+            viewModel.accept(UiAction.Search(query = "tv-show"))
+            home.setResult()
+        }
     }
 
     override fun onDestroyView() {

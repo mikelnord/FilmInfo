@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <Button
         android:id="@+id/button_movie"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:text="Movie"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/movie"
         app:layout_constraintEnd_toStartOf="@+id/button_tvseries"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_tvseries"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TV-series"
+        android:text="@string/tv_series"
         app:layout_constraintBaseline_toBaselineOf="@+id/button_movie"
         app:layout_constraintEnd_toStartOf="@+id/button_cartoon"
         app:layout_constraintHorizontal_bias="0.5"
@@ -28,11 +31,48 @@
 
     <Button
         android:id="@+id/button_cartoon"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cartoon"
+        android:text="@string/cartoon"
         app:layout_constraintBaseline_toBaselineOf="@+id/button_tvseries"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_tvseries" />
+
+    <Button
+        android:id="@+id/button_anime"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/anime"
+        app:layout_constraintEnd_toStartOf="@+id/button_animated_series"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_movie" />
+
+    <Button
+        android:id="@+id/button_animated_series"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/animated_series"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_anime"
+        app:layout_constraintEnd_toStartOf="@+id/button_tv_show"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_anime" />
+
+    <Button
+        android:id="@+id/button_tv_show"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_show"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_animated_series"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_animated_series" />
 </androidx.constraintlayout.widget.ConstraintLayout>

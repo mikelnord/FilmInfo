@@ -19,8 +19,16 @@ class Repository @Inject constructor(
     private val database: MoviesDatabase
 ) {
 
-    fun getSearchResultStream(query: String): Flow<PagingData<Movie>> {
-        val pagingSourceFactory = { database.moviesDao().moviesByName(query) }
+    fun getSearchResultStream(query: String, isFind: Boolean): Flow<PagingData<Movie>> {
+        val pagingSourceFactory = when (isFind) {
+            true -> {
+                { database.moviesDao().moviesByName(query) }
+            }
+            false -> {
+                { database.moviesDao().moviesByType(query) }
+            }
+        }
+
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
@@ -30,7 +38,8 @@ class Repository @Inject constructor(
             remoteMediator = MovieRemoteMediator(
                 query,
                 movieService,
-                database
+                database,
+                isFind
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow

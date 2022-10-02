@@ -18,7 +18,8 @@ private const val STARTING_PAGE_INDEX = 1
 class MovieRemoteMediator(
     private val query: String,
     private val service: MovieService,
-    private val moviesDatabase: MoviesDatabase
+    private val moviesDatabase: MoviesDatabase,
+    private val isFind: Boolean
 ) : RemoteMediator<Int, Movie>() {
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Movie>): MediatorResult {
@@ -46,14 +47,27 @@ class MovieRemoteMediator(
         }
 
         try {
-            val apiResponse = service.getFilmForType(
-                query,
-                "type",
-                "2022",
-                "year",
-                page,
-                state.config.pageSize
-            )
+            val apiResponse =
+                when (isFind) {
+                    false -> service.getFilmForType(
+                        query,
+                        "type",
+                        "2022",
+                        "year",
+                        "poster.previewUrl",
+                        "-1",
+                        page,
+                        state.config.pageSize
+                    )
+                    true -> service.getFindByName(
+                        query,
+                        "name",
+                        "false",
+                        page,
+                        state.config.pageSize
+                    )
+                }
+
 
             val movies = apiResponse.docs
             val endOfPaginationReached =
