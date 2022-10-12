@@ -9,13 +9,13 @@
         android:name="com.android.filminfo.ui.HomeFragment"
         android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            android:id="@+id/action_homeFragment_to_homeDetailFragment"
+            app:destination="@id/homeDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/movieDetailFragment"
-        android:name="com.android.filminfo.ui.MovieDetailFragment"
-        android:label="MovieDetailFragment" >
+        android:id="@+id/homeDetailFragment"
+        android:name="com.android.filminfo.ui.HomeDetailFragment"
+        android:label="HomeDetailFragment" >
         <argument
             android:name="movieId"
             app:argType="long" />

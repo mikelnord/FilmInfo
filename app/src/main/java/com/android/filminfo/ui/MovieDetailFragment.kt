@@ -6,18 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.android.filminfo.R
-import com.android.filminfo.databinding.MovieDetailBinding
+import com.android.filminfo.databinding.FragmentMovieDetailBinding
 import com.android.filminfo.util.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
-    private var _binding: MovieDetailBinding? = null
+    private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
-    private val detailViewModel: DetailViewModel by viewModels()
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -25,8 +26,8 @@ class MovieDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MovieDetailBinding.inflate(inflater, container, false)
-        detailViewModel.movie.observe(viewLifecycleOwner) { it ->
+        _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
+        (parentFragment as HomeDetailFragment).detailViewModel.movie.observe(viewLifecycleOwner) { it ->
             with(binding) {
                 val name = it.name ?: it.alternativeName
                 tvTitle.text = name ?: "NoName"

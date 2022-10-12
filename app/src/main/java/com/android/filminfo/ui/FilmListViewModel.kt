@@ -26,7 +26,7 @@ class FilmListViewModel @Inject constructor(
     init {
         val initialQuery: String =
             DEFAULT_QUERY //savedStateHandle.get(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
-        val actionStateFlow = MutableSharedFlow<UiAction>()
+        val actionStateFlow = MutableSharedFlow<UiAction>(replay = 1)
         val searches = actionStateFlow
             .filterIsInstance<UiAction.Search>()
             .distinctUntilChanged()

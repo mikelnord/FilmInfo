@@ -12,4 +12,6 @@
     <string name="tv_show">Tv-show</string>
     <string name="find">Find</string>
     <string name="name">Наименование</string>
+    <string name="person_title">Актеры</string>
+    <string name="desc_title">Описание</string>
 </resources>

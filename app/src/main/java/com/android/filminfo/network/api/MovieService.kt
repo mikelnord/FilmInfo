@@ -9,11 +9,11 @@ interface MovieService {
     @GET("movie")
     suspend fun getFilmForType(
         @Query("search") query: String,
-        @Query("field") field: String = "type",
-        @Query("search") search2: String = "2022",
-        @Query("field") field2: String = "year",
-        @Query("sortField") sortField: String = "2022",
-        @Query("sortType") sortType: String = "year",
+        @Query("field") field: String,
+        @Query("search") search2: String,
+        @Query("field") field2: String,
+        @Query("sortField") sortField: String,
+        @Query("sortType") sortType: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int
     ): MoviesList

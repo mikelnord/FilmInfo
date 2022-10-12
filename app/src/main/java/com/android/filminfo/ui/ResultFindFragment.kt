@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.android.filminfo.adapter.FilmListAdapter
 import com.android.filminfo.databinding.FragmentResultBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,13 +30,15 @@ class ResultFindFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentResultBinding.inflate(inflater, container, false)
-        context ?: return binding.root
+   //     context ?: return binding.root
         setupUI()
         return binding.root
     }
 
     private fun setupUI() {
         val adapter = FilmListAdapter()
+        val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        binding.recyclerResult.addItemDecoration(decoration)
         val header = LoadStateAdapter { adapter.retry() }
         binding.recyclerResult.adapter = adapter.withLoadStateHeaderAndFooter(
             header = header,
