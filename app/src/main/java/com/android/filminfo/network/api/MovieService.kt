@@ -1,6 +1,7 @@
 package com.android.filminfo.network.api
 
 import com.android.filminfo.model.MoviesList
+import com.android.filminfo.model.PersonList
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -27,4 +28,9 @@ interface MovieService {
         @Query("limit") limit: Int
     ): MoviesList
 
+    @GET("person")
+    suspend fun getPersonByFilm(
+        @Query("search") query: String,
+        @Query("field") field: String
+    ): PersonList
 }

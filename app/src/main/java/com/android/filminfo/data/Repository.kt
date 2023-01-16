@@ -48,6 +48,9 @@ class Repository @Inject constructor(
 
     fun getMovie(movieId: String) = database.moviesDao().getMovie(movieId)
 
+    suspend fun getPersonList(query: String, field: String) =
+        movieService.getPersonByFilm(query, field)
+
     companion object {
         private const val NETWORK_PAGE_SIZE = 50
     }

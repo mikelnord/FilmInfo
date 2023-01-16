@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.android.filminfo.R
 import com.android.filminfo.adapter.DESC_PAGE_INDEX
@@ -16,11 +15,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeDetailFragment() : Fragment() {
+class HomeDetailFragment : Fragment() {
 
     private var _binding: FragmentDetailHomeBinding? = null
     private val binding get() = _binding!!
-    val detailViewModel: DetailViewModel by viewModels()
     private lateinit var viewPager: ViewPager2
 
     override fun onCreateView(

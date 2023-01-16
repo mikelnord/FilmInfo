@@ -63,7 +63,7 @@ class FilmListAdapter : PagingDataAdapter<Movie, FilmListAdapter.ViewHolder>(
             movie: Movie,
             view: View
         ) {
-            val direction = HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment(movie.id)
+            val direction = HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movie.id)
             view.findNavController().navigate(direction)
         }
     }
