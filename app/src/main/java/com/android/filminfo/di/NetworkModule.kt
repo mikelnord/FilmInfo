@@ -1,5 +1,6 @@
 package com.android.filminfo.di
 
+import com.android.filminfo.BuildConfig
 import com.android.filminfo.network.AuthInterceptor
 import com.android.filminfo.network.api.MovieService
 import dagger.Module
@@ -10,13 +11,14 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     private const val BASE_URL = "https://api.kinopoisk.dev/"
-    private const val TOKEN ="CY2HJV4-KAHM896-PV1W9DQ-5W4GART"
+    private const val TOKEN = BuildConfig.KEY
 
 
     @Provides
@@ -26,6 +28,7 @@ object NetworkModule {
         return interceptor
     }
 
+    @Singleton
     @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor
@@ -36,6 +39,7 @@ object NetworkModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -45,6 +49,7 @@ object NetworkModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun provideCharacterService(retrofit: Retrofit): MovieService =
         retrofit.create(MovieService::class.java)

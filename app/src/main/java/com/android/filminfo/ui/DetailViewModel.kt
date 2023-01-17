@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.android.filminfo.data.Repository
 import com.android.filminfo.model.Person
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
@@ -17,8 +18,14 @@ class DetailViewModel @Inject constructor(
     val movie = movieId.let {
         repository.getMovie(it.toString()).asLiveData()
     }
+    private val exceptionHandler =
+        CoroutineExceptionHandler { _, throwable ->
+            //onError(throwable)
+            println(throwable.message)
+        }
+
     val personList: LiveData<List<Person>> = movie.switchMap {
-        liveData(Dispatchers.IO) {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO+exceptionHandler) {
             emit(repository.getPersonList(it.id.toString(), "movies.id").docs)
         }
     }
