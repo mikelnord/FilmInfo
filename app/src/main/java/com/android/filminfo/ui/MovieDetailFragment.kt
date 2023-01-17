@@ -48,7 +48,7 @@ class MovieDetailFragment : Fragment() {
                 } else {
                     ivCover.loadImage(R.drawable.ic_broken_image)
                 }
-                detailViewModel.getPersonList()
+//                detailViewModel.getPersonList()
             }
         }
         val adapter = PersonListAdapter()

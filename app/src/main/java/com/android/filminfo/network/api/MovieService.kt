@@ -31,6 +31,7 @@ interface MovieService {
     @GET("person")
     suspend fun getPersonByFilm(
         @Query("search") query: String,
-        @Query("field") field: String
+        @Query("field") field: String,
+        @Query("limit") limit: Int=100
     ): PersonList
 }
